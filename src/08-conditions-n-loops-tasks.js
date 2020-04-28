@@ -15,7 +15,7 @@
  * 4) for numbers which are multiples of both three and five return 'FizzBuzz'
  *
  * @param {number} num
- * @return {any}
+ * @return {string}
  *
  * @example
  *   2 =>  2
@@ -27,8 +27,22 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  let result = '';
+
+  if (num % 3 === 0) {
+    result += 'Fizz';
+  }
+
+  if (num % 5 === 0) {
+    result += 'Buzz';
+  }
+
+  if (result === '') {
+    result = num;
+  }
+
+  return result;
 }
 
 
@@ -43,8 +57,14 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let result = 1;
+
+  for (let i = 2; i <= n; i += 1) {
+    result *= i;
+  }
+
+  return result;
 }
 
 
@@ -60,8 +80,14 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let result = 0;
+
+  for (let i = n1; i <= n2; i += 1) {
+    result += i;
+  }
+
+  return result;
 }
 
 
@@ -72,7 +98,7 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  * @param {number} a
  * @param {number} b
  * @param {number} c
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   1,2,3    =>  false
@@ -80,8 +106,11 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  const max = Math.max(a, b, c);
+  const sum = a + b + c - max;
+
+  return max < sum;
 }
 
 
