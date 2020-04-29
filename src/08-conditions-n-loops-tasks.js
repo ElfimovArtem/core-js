@@ -237,8 +237,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -254,8 +254,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return parseInt(String(num).split('').reverse().join(''), 10);
 }
 
 
@@ -288,7 +288,6 @@ function isCreditCardNumber(/* ccn */) {
  *   step1 : find sum of all digits
  *   step2 : if sum > 9 then goto step1 otherwise return the sum
  *
- * @param {number} n
  * @return {number}
  *
  * @example:
@@ -296,9 +295,16 @@ function isCreditCardNumber(/* ccn */) {
  *   23456 ( 2+3+4+5+6 = 20, 2+0 = 2) => 2
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
+ * @param num
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const toString = String(num);
+  const newArr = toString.split('');
+  const newNum = newArr.reduce((acc, cV) => acc + (+cV), 0);
+  if (newNum > 9) {
+    return getDigitalRoot(newNum);
+  }
+  return newNum;
 }
 
 
@@ -423,8 +429,44 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  const result = [];
+
+  for (let i = 0; i < 3; i += 1) {
+    let winX = true;
+    let winY = true;
+
+    for (let j = 0; j < 3; j += 1) {
+      if (position[j][i] !== position[0][i]) {
+        winX = false;
+      }
+
+      if (position[i][j] !== position[i][0]) {
+        winY = false;
+      }
+    }
+
+    if (winX && position[0][i] !== undefined) {
+      result.push(position[0][i]);
+    }
+
+    if (winY && position[i][0] !== undefined) {
+      result.push(position[i][0]);
+    }
+  }
+
+  if (position[0][0] === position[1][1] && position[0][0] === position[2][2]
+    && position[1][1] !== undefined) {
+    result.push(position[1][1]);
+  }
+
+  if (position[0][2] === position[1][1] && position[0][2] === position[2][0]
+    && position[1][1] !== undefined) {
+    result.push(position[1][1]);
+  }
+
+
+  return result.length !== 1 ? undefined : result[0];
 }
 
 
