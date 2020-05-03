@@ -170,15 +170,18 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *
  * @param {object} circle
  * @param {object} point
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { center: { x:0, y:0 }, radius:10 },  { x:0, y:0 }     => true
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const radius = Math.sqrt(((circle.center.x - point.x) ** 2)
+    + ((circle.center.y - point.y) ** 2));
+
+  return radius < circle.radius;
 }
 
 
@@ -270,7 +273,6 @@ function reverseInteger(num) {
  *
  * See algorithm here : https://en.wikipedia.org/wiki/Luhn_algorithm
  *
- * @param {number} cnn
  * @return {boolean}
  *
  * @example:
@@ -283,9 +285,26 @@ function reverseInteger(num) {
  *   4571234567890111 => false
  *   5436468789016589 => false
  *   4916123456789012 => false
+ * @param ccn
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const digits = String(ccn).split('');
+  let sum = 0;
+  let even = false;
+
+  for (let i = digits.length - 1; i >= 0; i -= 1) {
+    const dig = parseInt(digits[i], 10);
+    let doubled = dig * 2;
+
+    if (doubled > 9) {
+      doubled -= 9;
+    }
+
+    sum += (even) ? doubled : dig;
+    even = !even;
+  }
+
+  return sum % 10 === 0;
 }
 
 /**
